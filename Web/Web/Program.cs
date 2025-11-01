@@ -1,7 +1,6 @@
 using Infrastructure;
 using Infrastructure.Entities;
 using Infrastructure.Services.BlogServices;
-using Infrastructure.Services.EmailServices;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
