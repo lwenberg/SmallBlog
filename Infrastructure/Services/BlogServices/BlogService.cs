@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace Infrastructure.Services.BlogServices
     public class BlogService : IBlogService
     {
         private readonly WebContext _context;
-
         public BlogService(WebContext context)
         {
             _context = context;
@@ -27,8 +27,9 @@ namespace Infrastructure.Services.BlogServices
             return await _context.Blogs.FindAsync(id);
         }
 
-        public async Task<bool> CreateAsync(Blog blog)
+        public async Task<bool> CreateAsync(Blog blog, IdentityUser currentUser)
         {
+            blog.Author = currentUser.Email;
             await _context.Blogs.AddAsync(blog);
             return await _context.SaveChangesAsync() != 0;
         }

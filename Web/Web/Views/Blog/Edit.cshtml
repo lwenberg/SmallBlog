@@ -29,7 +29,7 @@
                 <input asp-for="PubDate" class="form-control" />
                 <span asp-validation-for="PubDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -39,7 +39,12 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="@Model!.Id" />
+        <input type="submit" value="Delete" />
+    </form>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infrastructure.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Text;
-using Infrastructure.Entities;
 
 namespace Infrastructure
 {
-    public class WebContext : DbContext
+    public class WebContext : IdentityDbContext<IdentityUser>
     {
         public WebContext(DbContextOptions<WebContext> options)
          : base(options)

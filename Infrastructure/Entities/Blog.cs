@@ -15,5 +15,8 @@ namespace Infrastructure.Entities
         public string? Body { get; set; }
         [DataType(DataType.Date), Display(Name = "Publication Date")]
         public DateTime PubDate { get; set; }
+
+        [Required, MinLength(3)]
+        public string? Author { get; set; } = "Test";
     }
 }

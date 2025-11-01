@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Web.Controllers
 {
@@ -12,9 +14,15 @@ namespace Web.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
-        public BlogController(IBlogService blogService)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public BlogController(IBlogService blogService,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _blogService = blogService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: BlogController
@@ -32,11 +40,18 @@ namespace Web.Controllers
             var blog = await _blogService.GetByIdAsync(id);
 
             if (blog is null)
-                return NotFound(new { message = $"Blog with ID {id} not found." });
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            ViewBag.CanEditPost = _signInManager.IsSignedIn(User) && currentUser!.Email == blog.Author;
 
             return View(blog);
         }
 
+        [Authorize]
         // GET: BlogController/Create
         public ActionResult Create()
         {
@@ -54,7 +69,14 @@ namespace Web.Controllers
                 return NotFound();
             }
 
-            var result = await _blogService.CreateAsync(blog);
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if(currentUser is null) 
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var result = await _blogService.CreateAsync(blog, currentUser!);
 
             if (!result)
             {
@@ -87,12 +109,12 @@ namespace Web.Controllers
 
             var result = await _blogService.UpdateAsync(blog);
 
-            if(!result)
+            if (!result)
             {
                 return NotFound();
             }
 
-            return RedirectToAction(nameof(Details),new {blog.Id});
+            return RedirectToAction(nameof(Details), new { blog.Id });
 
         }
 
@@ -107,14 +129,14 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            if(id == 0) 
-            { 
+            if (id == 0)
+            {
                 return BadRequest();
             }
 
             var result = await _blogService.DeleteAsync(id);
 
-            if(!result)
+            if (!result)
             {
                 return NotFound();
             }

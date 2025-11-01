@@ -5,19 +5,25 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@Html.DisplayFor(model => model.Title)</h1>
-<p>@Model.PubDate.ToString("MMMM") @Model.PubDate.Day, @Model.PubDate.Year</p>
-<div class="container">
-	<div class="row text-wrap">
-		<p>@Html.DisplayFor(model => model.Body)</p>
+<div class="d-flex justify-content-between">
+	<div>
+		<h1>@Html.DisplayFor(model => model.Title)</h1>
+		<p>@Model.PubDate.ToString("MMMM") @Model.PubDate.Day, @Model.PubDate.Year by @Model.Author</p>
+	</div>
+	<div class="align-content-center">
+		<a asp-action="Index">Back to List</a> |
+
+		@if (ViewBag.CanEditPost)
+		{
+			<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+		}
 	</div>
 </div>
-<div>
-	<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-	<a asp-action="Index">Back to List</a> |
-	<form asp-action="Delete">
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-		<input type="hidden" asp-for="@Model!.Id" />
-		<input type="submit" value="Delete" />
-	</form>
+
+<hr />
+<div class="text-wrap">
+	<p>@Html.DisplayFor(model => model.Body)</p>
 </div>
+
+
+
