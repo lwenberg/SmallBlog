@@ -6,6 +6,9 @@
 }
 
 <h1>Create Post</h1>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,8 +25,7 @@
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PubDate" class="control-label"></label>
-                <input asp-for="PubDate" class="form-control" />
+                <input type="hidden" asp-for="PubDate" class="form-control" value="@DateTime.Today"/>
                 <span asp-validation-for="PubDate" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
@@ -31,10 +33,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

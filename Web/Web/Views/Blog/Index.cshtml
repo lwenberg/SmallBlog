@@ -6,23 +6,24 @@
 }
 
 <p>
-	<a asp-action="Create">Create New</a>
+	<a asp-action="Create" class="text-dark text-decoration-none">Create New Post</a>
 </p>
 <div class="container py-5">
-	<h1 class="text-center mb-5">Last posts</h1>
 	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 		@foreach (var item in Model)
 		{
-			<div class="col">
-				<div class="card h-100">
-					<div class="card-body">
-						<h4 class="card-title">@item.Title</h4>
-						<small><i>@item.PubDate.ToString("MMMM") - @item.PubDate.Day</i></small>
-						<div class="card-text text-truncate">@item.Body</div>
-						<a asp-action="Details" asp-route-id="@item.Id">Continue reading...</a>
+			<a asp-action="Details" asp-route-id="@item.Id" class="text-dark text-decoration-none">
+				<div class="col">
+					<div class="card h-100">
+						<div class="card-body">
+							<h4 class="card-title">@item.Title</h4>
+							<small><i>@item.PubDate.ToString("MMMM") - @item.PubDate.Day</i></small>
+							<div class="card-text text-truncate">@item.Body</div>
+							<i><strong>Continue reading...</strong></i>
+						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		}
 	</div>
 </div>

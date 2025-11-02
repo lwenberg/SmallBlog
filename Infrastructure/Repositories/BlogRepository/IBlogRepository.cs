@@ -1,9 +1,9 @@
 ﻿using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace Infrastructure.Services.BlogServices
+namespace Infrastructure.Repositories.BlogRespository
 {
-    public interface IBlogService
+    public interface IBlogRepository
     {
         Task<List<Blog>> GetAllAsync();
         Task<Blog?> GetByIdAsync(int id);

@@ -7,12 +7,12 @@ using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
 
-namespace Infrastructure.Services.BlogServices
+namespace Infrastructure.Repositories.BlogRespository
 {
-    public class BlogService : IBlogService
+    public class BlogRepository : IBlogRepository
     {
         private readonly WebContext _context;
-        public BlogService(WebContext context)
+        public BlogRepository(WebContext context)
         {
             _context = context;
         }

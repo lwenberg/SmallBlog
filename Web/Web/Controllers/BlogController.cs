@@ -1,4 +1,4 @@
-﻿using Infrastructure.Services.BlogServices;
+﻿using Infrastructure.Repositories.BlogRespository;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +13,10 @@ namespace Web.Controllers
     [Controller]
     public class BlogController : Controller
     {
-        private readonly IBlogService _blogService;
+        private readonly IBlogRepository _blogService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        public BlogController(IBlogService blogService,
+        public BlogController(IBlogRepository blogService,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager)
         {

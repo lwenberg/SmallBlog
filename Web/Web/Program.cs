@@ -1,6 +1,6 @@
 using Infrastructure;
 using Infrastructure.Entities;
-using Infrastructure.Services.BlogServices;
+using Infrastructure.Repositories.BlogRespository;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +21,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 //    .AddEntityFrameworkStores<WebContext>()
 //    .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 //builder.Services.AddTransient<IEmailSender, EmailSender>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
