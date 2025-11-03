@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Repositories.BlogRespository;
-using Infrastructure.Entities;
+using Infrastructure.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -61,7 +61,7 @@ namespace Web.Controllers
         // POST: BlogController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Blog blog)
+        public async Task<IActionResult> Create(BlogDTO blog)
         {
 
             if (!ModelState.IsValid)
@@ -100,7 +100,7 @@ namespace Web.Controllers
         // POST: BlogController/Edit/<id>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Blog blog)
+        public async Task<IActionResult> Edit(BlogDTO blog)
         {
             if (!ModelState.IsValid)
             {

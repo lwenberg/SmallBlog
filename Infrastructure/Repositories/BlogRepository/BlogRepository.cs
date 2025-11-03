@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Infrastructure.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
+using Infrastructure.Mappers;
 
 namespace Infrastructure.Repositories.BlogRespository
 {
@@ -17,24 +19,33 @@ namespace Infrastructure.Repositories.BlogRespository
             _context = context;
         }
 
-        public async Task<List<Blog>> GetAllAsync()
+        public async Task<List<BlogDTO>> GetAllAsync()
         {
-            return await _context.Blogs.ToListAsync();
+            var blogs = await _context.Blogs.ToListAsync();
+            return blogs.Select(BlogMapper.ToDTO).ToList();
         }
 
-        public async Task<Blog?> GetByIdAsync(int id)
+        public async Task<BlogDTO?> GetByIdAsync(int id)
         {
-            return await _context.Blogs.FindAsync(id);
+            var blog = await _context.Blogs.FindAsync(id);
+            if(blog is null) 
+            {
+                return null;
+            }
+
+            return BlogMapper.ToDTO(blog);
         }
 
-        public async Task<bool> CreateAsync(Blog blog, IdentityUser currentUser)
+        public async Task<bool> CreateAsync(BlogDTO blogDto, IdentityUser currentUser)
         {
-            blog.Author = currentUser.Email;
+            blogDto.Author = currentUser.Email;
+            blogDto.PubDate = DateTime.Now;
+            var blog = BlogMapper.ToEntity(blogDto);
             await _context.Blogs.AddAsync(blog);
             return await _context.SaveChangesAsync() != 0;
         }
 
-        public async Task<bool> UpdateAsync(Blog blog)
+        public async Task<bool> UpdateAsync(BlogDTO blog)
         {
             var result = await _context.Blogs.Where(b => b.Id == blog.Id).ExecuteUpdateAsync(
                     b => b.SetProperty(i => i.Title, blog.Title)

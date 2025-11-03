@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.DTOs
 {
-    public class Blog
+    public class BlogDTO
     {
+
         public int Id { get; set; }
-        [MaxLength(100), MinLength(3)]
+        [MaxLength(100), MinLength(3), Required]
         public string? Title { get; set; }
         [MinLength(3), Required, DataType(DataType.Text)]
         public string? Body { get; set; }
         [DataType(DataType.Date), Display(Name = "Publication Date")]
         public DateTime PubDate { get; set; }
 
-        [Required, MinLength(3)]
+        [MinLength(3)]
         public string? Author { get; set; }
     }
 }

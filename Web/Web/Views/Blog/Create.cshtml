@@ -1,4 +1,4 @@
-﻿@model Infrastructure.Entities.Blog
+﻿@model Infrastructure.DTOs.BlogDTO;
 
 @{
     ViewData["Title"] = "Create";
@@ -23,10 +23,6 @@
                 <label asp-for="Body" class="control-label"></label>
                 <textarea asp-for="Body" class="form-control textarea-tidy"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="hidden" asp-for="PubDate" class="form-control" value="@DateTime.Today"/>
-                <span asp-validation-for="PubDate" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
