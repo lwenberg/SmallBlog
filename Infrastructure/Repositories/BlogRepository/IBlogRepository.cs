@@ -1,4 +1,4 @@
-﻿using Infrastructure.DTOs;
+﻿using Infrastructure.DTOs.BlogDTOs;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Repositories.BlogRespository
@@ -7,7 +7,7 @@ namespace Infrastructure.Repositories.BlogRespository
     {
         Task<List<BlogDTO>> GetAllAsync();
         Task<BlogDTO?> GetByIdAsync(int id);
-        Task<bool> CreateAsync(BlogDTO blogDto, IdentityUser currentUser);
+        Task<bool> CreateAsync(CreateBlogDTO createBlogDto, IdentityUser currentUser);
         Task<bool> UpdateAsync(BlogDTO blogDto);
         Task<bool> DeleteAsync(int id);
     }

@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Entities;
-using Infrastructure.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,21 +7,25 @@ using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
 using Infrastructure.Mappers;
+using Infrastructure.DTOs.BlogDTOs;
+using AutoMapper;
 
 namespace Infrastructure.Repositories.BlogRespository
 {
     public class BlogRepository : IBlogRepository
     {
         private readonly WebContext _context;
-        public BlogRepository(WebContext context)
+        private readonly IMapper _mapper;
+        public BlogRepository(WebContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<List<BlogDTO>> GetAllAsync()
         {
             var blogs = await _context.Blogs.ToListAsync();
-            return blogs.Select(BlogMapper.ToDTO).ToList();
+            return blogs.Select(_mapper.Map<BlogDTO>).ToList();
         }
 
         public async Task<BlogDTO?> GetByIdAsync(int id)
@@ -33,15 +36,14 @@ namespace Infrastructure.Repositories.BlogRespository
                 return null;
             }
 
-            return BlogMapper.ToDTO(blog);
+            return _mapper.Map<BlogDTO>(blog);
         }
 
-        public async Task<bool> CreateAsync(BlogDTO blogDto, IdentityUser currentUser)
+        public async Task<bool> CreateAsync(CreateBlogDTO createBlogDto, IdentityUser currentUser)
         {
-            blogDto.Author = currentUser.Email;
-            blogDto.PubDate = DateTime.Now;
-            var blog = BlogMapper.ToEntity(blogDto);
-            await _context.Blogs.AddAsync(blog);
+            createBlogDto.Author = currentUser.Email;
+            var blog = _mapper.Map<Blog>(createBlogDto);
+            await _context.Blogs.AddAsync(blog); 
             return await _context.SaveChangesAsync() != 0;
         }
 

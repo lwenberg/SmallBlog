@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Repositories.BlogRespository;
-using Infrastructure.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Infrastructure.DTOs.BlogDTOs;
 
 namespace Web.Controllers
 {
@@ -61,7 +61,7 @@ namespace Web.Controllers
         // POST: BlogController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BlogDTO blog)
+        public async Task<IActionResult> Create(CreateBlogDTO blog)
         {
 
             if (!ModelState.IsValid)
@@ -87,6 +87,7 @@ namespace Web.Controllers
         }
 
         // GET: BlogController/Edit/<id>
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var restul = await _blogService.GetByIdAsync(id);

@@ -1,11 +1,10 @@
 using Infrastructure;
-using Infrastructure.Entities;
+using Infrastructure.Mappers;
 using Infrastructure.Repositories.BlogRespository;
 using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-
-
+using AutoMapper;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +21,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 //    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-//builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddAutoMapper(typeof(BlogMapperProfile));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
