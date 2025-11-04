@@ -1,9 +1,5 @@
 ﻿using Infrastructure.Repositories.BlogRespository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Infrastructure.DTOs.BlogDTOs;
@@ -16,6 +12,7 @@ namespace Web.Controllers
         private readonly IBlogRepository _blogService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+
         public BlogController(IBlogRepository blogService,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager)
@@ -27,6 +24,7 @@ namespace Web.Controllers
 
         // GET: BlogController
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var blogs = await _blogService.GetAllAsync();
@@ -35,6 +33,7 @@ namespace Web.Controllers
 
         // GET: BlogController/Details/<id>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var blog = await _blogService.GetByIdAsync(id);
@@ -88,6 +87,7 @@ namespace Web.Controllers
 
         // GET: BlogController/Edit/<id>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var restul = await _blogService.GetByIdAsync(id);

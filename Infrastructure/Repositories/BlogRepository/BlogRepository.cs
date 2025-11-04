@@ -31,6 +31,7 @@ namespace Infrastructure.Repositories.BlogRespository
         public async Task<BlogDTO?> GetByIdAsync(int id)
         {
             var blog = await _context.Blogs.FindAsync(id);
+
             if(blog is null) 
             {
                 return null;
