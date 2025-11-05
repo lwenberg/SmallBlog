@@ -1,0 +1,36 @@
+﻿@using Infrastructure.DTOs.BlogDTOs
+@model BlogDTO;
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mt-4">
+	<div class="bg-white p-3 h-50">
+		<div class="d-flex justify-content-between">
+			<div>
+				<h1>@Html.DisplayFor(model => model.Title)</h1>
+				<p>@Model.PubDate.ToString("MMMM") @Model.PubDate.Day, @Model.PubDate.Year by @Model.Author</p>
+			</div>
+			<div class="align-content-center">
+				@* <a asp-action="Index">Back to List</a> | *@
+
+				@if (ViewBag.CanEditPost)
+				{
+					<a asp-action="Edit" asp-route-id="@Model?.Id">
+						<img src="~/svg/blog/edit-svgrepo-com.svg" width="30" height="30" />
+					</a>
+				}
+			</div>
+		</div>
+
+		<hr />
+		<div class="text-wrap">
+			<p>@Html.DisplayFor(model => model.Body)</p>
+		</div>
+	</div>
+</div>
+
+
+

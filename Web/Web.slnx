@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="../Infrastructure/Infrastructure.csproj" Id="4be351d3-b68b-4ef5-869e-b5694c5da966" />
-  <Project Path="Web/Web.csproj" />
-</Solution>

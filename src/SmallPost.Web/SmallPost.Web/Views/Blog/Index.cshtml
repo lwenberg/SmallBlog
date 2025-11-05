@@ -1,0 +1,27 @@
+﻿@using Infrastructure.DTOs.BlogDTOs
+@model IEnumerable<BlogDTO>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mb-4 mt-5">
+	<div class="row w-100">
+		@foreach (var item in Model)
+		{
+			<a asp-action="Details" asp-route-id="@item.Id" class="text-dark text-decoration-none">
+				<div class="col">
+					<div class="card h-100">
+						<div class="card-body">
+							<h4 class="card-title text-truncate">@item.Title</h4>
+							<small><i>@item.PubDate.ToString("MMMM") - @item.PubDate.Day</i></small>
+							<div class="card-text text-truncate">@item.Body</div>
+							<i><strong>Continue reading...</strong></i>
+						</div>
+					</div>
+				</div>
+			</a>
+		}
+	</div>
+</div>

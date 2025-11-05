@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:WebContextConnection"
+    },
+    "mssql1": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:WebContextConnection"
+    }
+  }
+}
