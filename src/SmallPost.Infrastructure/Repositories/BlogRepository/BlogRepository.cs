@@ -9,6 +9,8 @@ using System.Xml.XPath;
 using Infrastructure.Mappers;
 using Infrastructure.DTOs.BlogDTOs;
 using AutoMapper;
+using Microsoft.Data.SqlClient;
+using System.Formats.Tar;
 
 namespace Infrastructure.Repositories.BlogRespository
 {
@@ -32,7 +34,7 @@ namespace Infrastructure.Repositories.BlogRespository
         {
             var blog = await _context.Blogs.FindAsync(id);
 
-            if(blog is null) 
+            if (blog is null)
             {
                 return null;
             }
@@ -42,9 +44,8 @@ namespace Infrastructure.Repositories.BlogRespository
 
         public async Task<bool> CreateAsync(CreateBlogDTO createBlogDto, IdentityUser currentUser)
         {
-            createBlogDto.Author = currentUser.Email;
-            var blog = _mapper.Map<Blog>(createBlogDto);
-            await _context.Blogs.AddAsync(blog); 
+            var blog = _mapper.Map<CreateBlogDTO, Blog>(createBlogDto, opt => opt.Items["email"] = currentUser.Email);
+            await _context.Blogs.AddAsync(blog);
             return await _context.SaveChangesAsync() != 0;
         }
 

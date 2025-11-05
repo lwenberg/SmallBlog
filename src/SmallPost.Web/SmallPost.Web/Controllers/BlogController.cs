@@ -60,26 +60,26 @@ namespace Web.Controllers
         // POST: BlogController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateBlogDTO blog)
+        public async Task<IActionResult> Create(CreateBlogDTO blogDto)
         {
 
             if (!ModelState.IsValid)
             {
-                return NotFound();
+                return View(blogDto);
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
 
             if(currentUser is null) 
-            {
+            { 
                 return RedirectToAction(nameof(Index));
             }
 
-            var result = await _blogService.CreateAsync(blog, currentUser!);
+            var result = await _blogService.CreateAsync(blogDto, currentUser!);
 
             if (!result)
             {
-                return NotFound();
+                return View(blogDto);
             }
 
             return RedirectToAction(nameof(Index));
