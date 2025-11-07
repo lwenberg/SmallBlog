@@ -33,13 +33,15 @@
 	var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<a asp-action="Index"
-   asp-route-pageIndex="@(Model.PageIndex - 1)"
-   class="btn btn-default @prevDisabled">
-	Previous
-</a>
-<a asp-action="Index"
-   asp-route-pageIndex="@(Model.PageIndex + 1)"
-   class="btn btn-default @nextDisabled">
-	Next
-</a>
+<div>
+	<a asp-action="Index"
+	   asp-route-pageIndex="@(Model.PageIndex - 1)"
+	   class="btn btn-outline-dark @prevDisabled">
+		Previous
+	</a>
+	<a asp-action="Index"
+	   asp-route-pageIndex="@(Model.PageIndex + 1)"
+	   class="btn btn-outline-dark @nextDisabled">
+		Next
+	</a>
+</div>
