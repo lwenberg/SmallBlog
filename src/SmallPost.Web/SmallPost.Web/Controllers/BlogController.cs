@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Infrastructure.DTOs.BlogDTOs;
+using SmallPost.Web.Helpers;
 
 namespace Web.Controllers
 {
@@ -25,10 +26,20 @@ namespace Web.Controllers
         // GET: BlogController
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            var blogs = await _blogService.GetAllAsync();
-            return View(blogs);
+            int pageSize = 4;
+
+            try
+            {
+                var blogs = await _blogService.GetPaginatedBlogsAsync(pageIndex, pageSize, HttpContext.RequestAborted);
+
+                return View(blogs);
+            }
+            catch (OperationCanceledException) when (HttpContext.RequestAborted.IsCancellationRequested)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: BlogController/Details/<id>
@@ -70,8 +81,8 @@ namespace Web.Controllers
 
             var currentUser = await _userManager.GetUserAsync(User);
 
-            if(currentUser is null) 
-            { 
+            if (currentUser is null)
+            {
                 return RedirectToAction(nameof(Index));
             }
 
@@ -93,7 +104,9 @@ namespace Web.Controllers
             var restul = await _blogService.GetByIdAsync(id);
 
             if (restul is null)
+            {
                 return NotFound();
+            }
 
             return View(restul);
         }
@@ -118,12 +131,6 @@ namespace Web.Controllers
             return RedirectToAction(nameof(Details), new { blog.Id });
 
         }
-
-        //// GET: BlogController/Delete/<id>
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
 
         // POST: BlogController/Delete/<id>
         [HttpPost]

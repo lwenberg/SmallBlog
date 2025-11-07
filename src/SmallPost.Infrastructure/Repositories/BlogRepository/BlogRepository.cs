@@ -1,16 +1,20 @@
-﻿using Infrastructure.Entities;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Infrastructure.DTOs.BlogDTOs;
+using Infrastructure.Entities;
+using Infrastructure.Mappers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Formats.Tar;
+using System.Linq;
 using System.Text;
 using System.Xml.XPath;
-using Infrastructure.Mappers;
-using Infrastructure.DTOs.BlogDTOs;
-using AutoMapper;
-using Microsoft.Data.SqlClient;
-using System.Formats.Tar;
+using SmallPost.Infrastructure.Helpers;
+using Microsoft.Identity.Client;
 
 namespace Infrastructure.Repositories.BlogRespository
 {
@@ -22,12 +26,6 @@ namespace Infrastructure.Repositories.BlogRespository
         {
             _context = context;
             _mapper = mapper;
-        }
-
-        public async Task<List<BlogDTO>> GetAllAsync()
-        {
-            var blogs = await _context.Blogs.ToListAsync();
-            return blogs.Select(_mapper.Map<BlogDTO>).ToList();
         }
 
         public async Task<BlogDTO?> GetByIdAsync(int id)
@@ -63,6 +61,18 @@ namespace Infrastructure.Repositories.BlogRespository
         {
             var result = await _context.Blogs.Where(b => b.Id == id).ExecuteDeleteAsync();
             return result != 0;
+        }
+
+        public async Task<PaginationListHelper<BlogDTO>> GetPaginatedBlogsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken)
+        {
+            var totalItems = await _context.Blogs.CountAsync(cancellationToken);
+            var blogs = await _context.Blogs.AsNoTracking()
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ProjectTo<BlogDTO>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+
+            return await PaginationListHelper<BlogDTO>.CreateAsync(blogs, totalItems, pageIndex, pageSize);
         }
     }
 }

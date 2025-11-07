@@ -1,12 +1,14 @@
 ﻿@using Infrastructure.DTOs.BlogDTOs
-@model IEnumerable<BlogDTO>
+@using SmallPost.Infrastructure.Helpers;
+
+@model PaginationListHelper<BlogDTO>
 
 @{
 	ViewData["Title"] = "Index";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mb-4 mt-5">
+<div class="mb-4 mt-5">
 	<div class="row w-100">
 		@foreach (var item in Model)
 		{
@@ -25,3 +27,19 @@
 		}
 	</div>
 </div>
+
+@{
+	var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageIndex="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+	Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageIndex="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+	Next
+</a>
