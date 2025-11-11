@@ -2,12 +2,20 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-const messageInputElem = document.getElementById('messageInput');
-const charCountElem = document.getElementById('counter');
+window.addEventListener('DOMContentLoaded', function () {
 
-messageInputElem.addEventListener('input', function () {
-    const maxLength = this.maxLength;
-    const currentLength = this.value.length;
-    const remainingChars = maxLength - currentLength;
-    charCountElem.textContent = remainingChars + '/'+maxLength;
+    const messageInputElem = document.getElementById('messageInput');
+    const charCountElem = document.getElementById('counter');
+
+    function updateCounter() {
+        const maxLength = messageInputElem.maxLength;
+        const currentLength = messageInputElem.value.length;
+        const remainingChars = maxLength - currentLength;
+        charCountElem.textContent = remainingChars + '/' + maxLength;
+    }
+
+    messageInputElem.addEventListener('input', updateCounter);
+
+    updateCounter();
+
 });
