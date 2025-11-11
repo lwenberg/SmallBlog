@@ -1,7 +1,6 @@
-﻿@using Infrastructure.DTOs.BlogDTOs
-@using SmallPost.Infrastructure.Helpers;
+﻿@using SmallPost.Web.ViewModels
 
-@model PaginationListHelper<BlogDTO>
+@model BlogsViewModel
 
 @{
 	ViewData["Title"] = "Index";
@@ -10,7 +9,7 @@
 
 <div class="container mb-4 mt-5">
 	<div class="row w-100">
-		@foreach (var item in Model)
+		@foreach (var item in Model.BlogsPagination)
 		{
 			<a asp-action="Details" asp-route-id="@item.Id" class="text-dark text-decoration-none">
 				<div class="col-md-10 mx-auto py-2">
@@ -30,20 +29,15 @@
 	</div>
 </div>
 
-@{
-	var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-	var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-
 <div>
 	<a asp-action="Index"
-	   asp-route-pageIndex="@(Model.PageIndex - 1)"
-	   class="btn btn-outline-dark @prevDisabled">
+	   asp-route-pageIndex="@(Model.BlogsPagination.PageIndex - 1)"
+	   class="btn btn-outline-dark @Model.PrevPageDisable">
 		Previous
 	</a>
 	<a asp-action="Index"
-	   asp-route-pageIndex="@(Model.PageIndex + 1)"
-	   class="btn btn-outline-dark @nextDisabled">
+	   asp-route-pageIndex="@(Model.BlogsPagination.PageIndex + 1)"
+	   class="btn btn-outline-dark @Model.NextPageDisable">
 		Next
 	</a>
 </div>
