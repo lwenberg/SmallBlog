@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap');
+
 html {
   font-size: 14px;
 }
@@ -30,16 +32,19 @@ body {
   text-align: start;
 }
 
-.card {
-    transition: transform 0.3s, box-shadow 0.3s;
+.text-decoration:hover {
+    color: #007BA7;
 }
 
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
-    }
+.custom-title-text {
+    font-family: "Stack Sans Headline", sans-serif;
+    font-size: 30px;
+}
 
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
+.custom-body-text {
+    font-size: 25px;
+}
+
+.post-body-custom {
+    font-size: 22px;
 }

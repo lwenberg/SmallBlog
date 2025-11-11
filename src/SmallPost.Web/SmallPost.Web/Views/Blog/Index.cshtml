@@ -8,18 +8,20 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="mb-4 mt-5">
+<div class="container mb-4 mt-5">
 	<div class="row w-100">
 		@foreach (var item in Model)
 		{
 			<a asp-action="Details" asp-route-id="@item.Id" class="text-dark text-decoration-none">
-				<div class="col">
-					<div class="card h-100">
+				<div class="col-md-10 mx-auto py-2">
+					<div class="">
 						<div class="card-body">
-							<h4 class="card-title text-truncate">@item.Title</h4>
-							<small><i>@item.PubDate.ToString("MMMM") - @item.PubDate.Day</i></small>
-							<div class="card-text text-truncate">@item.Body</div>
-							<i><strong>Continue reading...</strong></i>
+							<div class="text-decoration">
+								<h4 class="card-title custom-title-text">@item.Title</h4>
+								<div class="card-text text-truncate custom-body-text">@item.Body</div>
+							</div>
+							<small><i>Posted by @item.Author on @item.PubDate.ToString("MMMM") - @item.PubDate.Day</i></small>
+							<hr />
 						</div>
 					</div>
 				</div>

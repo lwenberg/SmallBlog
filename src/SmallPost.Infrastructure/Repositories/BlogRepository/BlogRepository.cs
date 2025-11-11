@@ -69,6 +69,7 @@ namespace Infrastructure.Repositories.BlogRespository
             var blogs = await _context.Blogs.AsNoTracking()
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
+                .OrderBy(i => i.Id)
                 .ProjectTo<BlogDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
