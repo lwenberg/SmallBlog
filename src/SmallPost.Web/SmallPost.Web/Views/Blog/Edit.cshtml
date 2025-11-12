@@ -11,10 +11,7 @@
         <h3>Edit post</h3>
     </div>
     <div>
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="@Model!.Id" />
-            <input type="image" src="~/svg/blog/trash-bin-trash-svgrepo-com (1).svg" alt="Submit" width="30" height="30" class="text-danger" />
-        </form>
+        @await Html.PartialAsync("_DeletePartial", Model)
     </div>
 </div>
 <div class="row bg-white mt-4 p-4">

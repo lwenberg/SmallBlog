@@ -1,0 +1,22 @@
+﻿@using Infrastructure.DTOs.BlogDTOs
+@model BlogDTO;
+
+<form asp-action="Delete" id="formDelete">
+	<input type="hidden" asp-for="@Model.Id" />
+</form>
+
+<input type="image" src="~/svg/blog/trash-bin-trash-svgrepo-com (1).svg" alt="Submit" width="30" height="30" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" />
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Are you sure?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" value="Cancel">Cancel</button>
+                <button type="submit" class="btn btn-outline-danger" form="formDelete" value="Delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
