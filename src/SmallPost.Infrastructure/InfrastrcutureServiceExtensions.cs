@@ -1,9 +1,10 @@
-﻿using Infrastructure.Repositories.BlogRespository;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmallPost.Domain.Services.BlogService;
+using SmallPost.Infrastructure.Data;
+using SmallPost.Infrastructure.Data.Repositories.BlogRepository;
 
 namespace SmallPost.Infrastructure
 {
@@ -14,7 +15,7 @@ namespace SmallPost.Infrastructure
         {
             services.AddDbContext<WebContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("BlogContext")
-                    ?? throw new InvalidOperationException("Connection string 'MvcMovieContext' not found.")));
+                    ?? throw new InvalidOperationException("Connection string 'BlogContext' not found.")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<WebContext>();

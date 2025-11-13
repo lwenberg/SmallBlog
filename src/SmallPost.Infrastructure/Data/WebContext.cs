@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SmallPost.Domain.Entities;
 
-namespace SmallPost.Infrastructure
+namespace SmallPost.Infrastructure.Data
 {
     public class WebContext : IdentityDbContext<IdentityUser>
     {
