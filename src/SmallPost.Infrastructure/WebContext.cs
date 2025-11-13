@@ -1,9 +1,9 @@
-﻿using Infrastructure.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SmallPost.Domain.Entities;
 
-namespace Infrastructure
+namespace SmallPost.Infrastructure
 {
     public class WebContext : IdentityDbContext<IdentityUser>
     {

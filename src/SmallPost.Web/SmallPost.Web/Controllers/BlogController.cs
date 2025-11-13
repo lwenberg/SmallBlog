@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Infrastructure.DTOs.BlogDTOs;
 using SmallPost.Web.ViewModels;
+using SmallPost.Domain.DTOs.BlogDTOs;
+using SmallPost.Domain.Services.BlogService;
 
-namespace Web.Controllers
+namespace SmallPost.Web.Controllers
 {
     [Controller]
     public class BlogController : Controller
@@ -33,7 +34,8 @@ namespace Web.Controllers
             try
             {
                 var blogsPagination = await _blogService.GetPaginatedBlogsAsync(pageIndex, pageSize, HttpContext.RequestAborted);
-                var blogView = new BlogsViewModel(blogsPagination);
+                var blogView = BlogsViewModel.Create(blogsPagination);
+
                 return View(blogView);
             }
             catch (OperationCanceledException) when (HttpContext.RequestAborted.IsCancellationRequested)
@@ -118,7 +120,7 @@ namespace Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return NotFound();
+                return View(blog);
             }
 
             var result = await _blogService.UpdateAsync(blog);

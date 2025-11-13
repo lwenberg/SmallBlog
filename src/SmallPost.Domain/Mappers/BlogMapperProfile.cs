@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Formats.Tar;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Infrastructure.DTOs.BlogDTOs;
-using Infrastructure.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using SmallPost.Domain.DTOs.BlogDTOs;
+using SmallPost.Domain.Entities;
 
-namespace Infrastructure.Mappers
+namespace SmallPost.Domain.Mappers
 {
     public class BlogMapperProfile : Profile
     {

@@ -1,5 +1,5 @@
-﻿using Infrastructure.DTOs.BlogDTOs;
-using SmallPost.Infrastructure.Helpers;
+﻿using SmallPost.Domain.DTOs.BlogDTOs;
+using SmallPost.Domain.Helpers;
 
 namespace SmallPost.Web.ViewModels
 {
@@ -14,6 +14,11 @@ namespace SmallPost.Web.ViewModels
             BlogsPagination = blogs;
             PrevPageDisable = !blogs.HasPreviousPage ? "disabled" : "";
             NextPageDisable = !blogs.HasNextPage ? "disabled" : "";
+        }
+
+        public static BlogsViewModel Create(PaginationListHelper<BlogDTO> blogsPagination)
+        {
+            return new BlogsViewModel(blogsPagination);
         }
     }
 }

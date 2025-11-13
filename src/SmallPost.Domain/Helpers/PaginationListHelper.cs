@@ -1,7 +1,6 @@
-﻿using Infrastructure.DTOs.BlogDTOs;
-using Microsoft.EntityFrameworkCore;
+﻿
 
-namespace SmallPost.Infrastructure.Helpers
+namespace SmallPost.Domain.Helpers
 {
     public class PaginationListHelper<T> : List<T>
     {

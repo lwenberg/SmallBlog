@@ -1,20 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Infrastructure.DTOs.BlogDTOs;
-using Infrastructure.Entities;
-using Infrastructure.Mappers;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Formats.Tar;
-using System.Linq;
-using System.Text;
-using System.Xml.XPath;
-using SmallPost.Infrastructure.Helpers;
-using Microsoft.Identity.Client;
+using SmallPost.Infrastructure;
+using SmallPost.Domain.DTOs.BlogDTOs;
+using SmallPost.Domain.Entities;
+using SmallPost.Domain.Helpers;
+using SmallPost.Domain.Services.BlogService;
 
 namespace Infrastructure.Repositories.BlogRespository
 {

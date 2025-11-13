@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.DTOs.BlogDTOs
+namespace SmallPost.Domain.DTOs.BlogDTOs
 {
     public class BlogDTO
     {

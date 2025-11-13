@@ -1,8 +1,9 @@
-using Infrastructure;
-using Infrastructure.Mappers;
 using Infrastructure.Repositories.BlogRespository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SmallPost.Infrastructure;
+using SmallPost.Domain.Mappers;
+using SmallPost.Domain.Services.BlogService;
 
 var builder = WebApplication.CreateBuilder(args);
 
