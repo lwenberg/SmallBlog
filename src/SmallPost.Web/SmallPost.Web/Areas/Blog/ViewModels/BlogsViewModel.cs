@@ -1,7 +1,7 @@
 ﻿using SmallPost.Domain.DTOs.BlogDTOs;
 using SmallPost.Domain.Helpers;
 
-namespace SmallPost.Web.ViewModels
+namespace SmallPost.Web.Areas.Blog.ViewModels
 {
     public class BlogsViewModel
     {

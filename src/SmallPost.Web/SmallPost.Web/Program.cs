@@ -27,10 +27,10 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Blog}/{action=Index}/{id?}")
-    .WithStaticAssets();
+app.MapAreaControllerRoute(
+    areaName : "Blog",
+    name: "Blog",
+    pattern: "{controller=Blog}/{action=Index}/{id?}");
 
 app.UseAntiforgery();
 app.MapRazorPages();
