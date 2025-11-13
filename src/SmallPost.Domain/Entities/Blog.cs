@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata;
 using System.Text;
 
-namespace Infrastructure.Entities
+namespace SmallPost.Domain.Entities
 {
     public class Blog
     {

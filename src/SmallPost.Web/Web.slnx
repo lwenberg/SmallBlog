@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="../SmallPost.Infrastructure/SmallPost.Infrastructure.csproj" Id="4be351d3-b68b-4ef5-869e-b5694c5da966" />
+  <Project Path="../SmallPost.Domain/SmallPost.Domain.csproj" Id="d2308a87-9d2f-4b62-b78e-45179af63ac8" />
   <Project Path="SmallPost.Web/SmallPost.Web.csproj" />
 </Solution>

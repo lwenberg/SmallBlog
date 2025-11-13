@@ -1,9 +1,8 @@
-﻿using Azure;
-using Infrastructure.DTOs.BlogDTOs;
-using Microsoft.AspNetCore.Identity;
-using SmallPost.Infrastructure.Helpers;
+﻿using Microsoft.AspNetCore.Identity;
+using SmallPost.Domain.DTOs.BlogDTOs;
+using SmallPost.Domain.Helpers;
 
-namespace Infrastructure.Repositories.BlogRespository
+namespace SmallPost.Domain.Services.BlogService
 {
     public interface IBlogRepository
     {
