@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SmallPost.Infrastructure;
+using SmallPost.Infrastructure.Data;
 
 #nullable disable
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(WebContext))]
-    [Migration("20251031202212_IndentitySchema")]
-    partial class IndentitySchema
+    [Migration("20251031210848_AddBlogAuthor")]
+    partial class AddBlogAuthor
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Body")
                         .IsRequired()

@@ -2,13 +2,12 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SmallPost.Infrastructure;
 using SmallPost.Domain.DTOs.BlogDTOs;
 using SmallPost.Domain.Entities;
 using SmallPost.Domain.Helpers;
 using SmallPost.Domain.Services.BlogService;
 
-namespace Infrastructure.Repositories.BlogRespository
+namespace SmallPost.Infrastructure.Data.Repositories.BlogRepository
 {
     public class BlogRepository : IBlogRepository
     {

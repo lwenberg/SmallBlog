@@ -1,5 +1,4 @@
-﻿using Infrastructure.Repositories.BlogRespository;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using SmallPost.Web.ViewModels;

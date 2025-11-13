@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SmallPost.Infrastructure;
+using SmallPost.Infrastructure.Data;
 
 #nullable disable
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(WebContext))]
-    [Migration("20251031210848_AddBlogAuthor")]
-    partial class AddBlogAuthor
+    partial class WebContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

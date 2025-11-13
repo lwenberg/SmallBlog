@@ -1,24 +1,12 @@
-using Infrastructure.Repositories.BlogRespository;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SmallPost.Infrastructure;
 using SmallPost.Domain.Mappers;
-using SmallPost.Domain.Services.BlogService;
+using SmallPost.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<WebContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("BlogContext")
-        ?? throw new InvalidOperationException("Connection string 'MvcMovieContext' not found.")));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<WebContext>();
-
-builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddAutoMapper(cfg => { }, typeof(BlogMapperProfile));
-
-// Add services to the container.
+builder.Services
+    .AddInfrastructureDBContext(builder.Configuration)
+    .AddInfrastructureDependeyGroup();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
