@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using SmallPost.Web.ViewModels;
 using SmallPost.Domain.DTOs.BlogDTOs;
 using SmallPost.Domain.Services.BlogService;
+using SmallPost.Web.Areas.Blog.ViewModels;
 
-namespace SmallPost.Web.Controllers
+namespace SmallPost.Web.Areas.Blog.Controllers
 {
+    [Area("Blog")]
     [Controller]
     public class BlogController : Controller
     {
